@@ -1,0 +1,1 @@
+{"product":"酒炙当归","lot":"proc-0915-a","inputKg":"120.0","movements":[{"kind":"split","outputs":["a-1","a-2"]},{"kind":"rework","source":"a-2","target":"a-2-r1"}],"deviations":[{"kind":"temperature-gap","durationMinutes":10},{"kind":"yield-mismatch","reportedKg":"111.6"}]}
