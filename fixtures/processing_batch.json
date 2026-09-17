@@ -1,1 +1,158 @@
-{"product":"酒炙当归","lot":"proc-0915-a","inputKg":"120.0","movements":[{"kind":"split","outputs":["a-1","a-2"]},{"kind":"rework","source":"a-2","target":"a-2-r1"}],"deviations":[{"kind":"temperature-gap","durationMinutes":10},{"kind":"yield-mismatch","reportedKg":"111.6"}]}
+{
+  "product": "酒炙当归",
+  "lot": "proc-0915-a",
+  "inputKg": "120.0",
+  "specificationVersion": "v2024.1",
+  "description": "2026-09-15 酒炙当归批：净切加酒润后拆为 a-1/a-2；a-1 炒制曲线靠传感器补传补齐后签署放行；a-2 已签署炒制曲线存在约10分钟缺口且收率对不上，偏差评估后整批返工为 a-2-r1。车间曾引用上一批 proc-0914-z 的报告申请放行。",
+  "users": [
+    {"id": "op-zhao", "name": "赵操作", "roles": ["operator"]},
+    {"id": "qa-sun", "name": "孙QA", "roles": ["qa"]},
+    {"id": "dev-qian", "name": "钱偏差管理员", "roles": ["deviation_owner"]},
+    {"id": "plan-li", "name": "李工艺员", "roles": ["rework_planner"]},
+    {"id": "qp-wang", "name": "王受权人", "roles": ["qp"]}
+  ],
+  "materials": [
+    {"lot": "proc-0915-a", "product": "酒炙当归", "initialKg": "120.000", "issuedBy": "op-zhao", "at": "2026-09-15T07:00:00"},
+    {"lot": "wine-0915", "product": "黄酒", "initialKg": "15.000", "isExcipient": true, "issuedBy": "op-zhao", "at": "2026-09-15T07:05:00"},
+    {"lot": "proc-0914-z", "product": "酒炙当归", "initialKg": "100.000", "at": "2026-09-14T07:00:00", "note": "上一批（仅用于其历史报告，不参与本批物料）"}
+  ],
+  "processes": [
+    {"recordId": "rec-clean", "lot": "proc-0915-a", "kind": "clean", "version": "v2024.1",
+     "start": "2026-09-15T07:10:00", "end": "2026-09-15T08:00:00",
+     "params": {"remove_impurity_pct": "1.5"}, "inputKg": "120.000", "outputKg": "118.200", "confirmedBy": "op-zhao"},
+    {"recordId": "rec-cut", "lot": "proc-0915-a", "kind": "cut", "version": "v2024.1",
+     "start": "2026-09-15T08:05:00", "end": "2026-09-15T08:50:00",
+     "params": {"slice_thickness_mm": "1.5"}, "inputKg": "118.200", "outputKg": "117.500", "confirmedBy": "op-zhao"},
+    {"recordId": "rec-addwine", "lot": "proc-0915-a", "kind": "add_excipient", "version": "v2024.1",
+     "start": "2026-09-15T09:00:00", "end": "2026-09-15T09:10:00",
+     "params": {"wine_ratio_pct": "12.0", "wine_alcohol_degree": "14"},
+     "excipientLot": "wine-0915", "excipientKg": "14.100", "confirmedBy": "op-zhao"},
+    {"recordId": "rec-moisten", "lot": "proc-0915-a", "kind": "moisten", "version": "v2024.1",
+     "start": "2026-09-15T09:10:00", "end": "2026-09-15T09:55:00",
+     "params": {"moisten_minutes": "45", "turning_count": "3"}, "inputKg": "131.600", "outputKg": "131.200", "confirmedBy": "op-zhao"},
+
+    {"recordId": "rec-fry-a1", "lot": "a-1", "kind": "fry", "version": "v2024.1",
+     "start": "2026-09-15T10:10:00", "end": "2026-09-15T10:22:00",
+     "params": {"set_temp_c": "150", "fry_minutes": "10"},
+     "inputKg": "78.700", "outputKg": "73.200",
+     "curve": "curve-fry-a1", "backfill": {"digest": "sha256:gw-a1", "at": "2026-09-15T10:18:00", "gap": [330, 420]},
+     "confirmedBy": "op-zhao", "confirmedAt": "2026-09-15T10:25:00"},
+    {"recordId": "rec-dry-a1", "lot": "a-1", "kind": "dry", "version": "v2024.1",
+     "start": "2026-09-15T10:30:00", "end": "2026-09-15T11:20:00",
+     "params": {"dry_temp_c": "70", "moisture_pct": "10.2"}, "inputKg": "73.200", "outputKg": "70.400", "confirmedBy": "op-zhao"},
+    {"recordId": "rec-pack-a1", "lot": "a-1", "kind": "pack", "version": "v2024.1",
+     "start": "2026-09-15T13:00:00", "end": "2026-09-15T15:00:00",
+     "params": {"net_weight_g": "500"}, "inputKg": "70.100", "outputKg": "70.100", "confirmedBy": "op-zhao"},
+
+    {"recordId": "rec-fry-a2", "lot": "a-2", "kind": "fry", "version": "v2024.1",
+     "start": "2026-09-15T10:30:00", "end": "2026-09-15T10:47:00",
+     "params": {"set_temp_c": "150", "fry_minutes": "15"},
+     "inputKg": "52.500", "outputKg": "48.900",
+     "curve": "curve-fry-a2",
+     "confirmedBy": "op-zhao", "confirmedAt": "2026-09-15T10:50:00"},
+    {"recordId": "rec-dry-a2", "lot": "a-2", "kind": "dry", "version": "v2024.1",
+     "start": "2026-09-15T10:55:00", "end": "2026-09-15T11:40:00",
+     "params": {"dry_temp_c": "70", "moisture_pct": "10.4"}, "inputKg": "48.900", "outputKg": "47.000", "confirmedBy": "op-zhao"},
+
+    {"recordId": "rec-fry-r1", "lot": "a-2-r1", "kind": "fry", "version": "v2024.1",
+     "start": "2026-09-16T15:10:00", "end": "2026-09-16T15:22:00",
+     "params": {"set_temp_c": "150", "fry_minutes": "10"},
+     "inputKg": "46.700", "outputKg": "44.500",
+     "curve": "curve-fry-r1",
+     "confirmedBy": "op-zhao", "confirmedAt": "2026-09-16T15:25:00"},
+    {"recordId": "rec-dry-r1", "lot": "a-2-r1", "kind": "dry", "version": "v2024.1",
+     "start": "2026-09-16T15:30:00", "end": "2026-09-16T16:20:00",
+     "params": {"dry_temp_c": "70", "moisture_pct": "10.1"}, "inputKg": "44.500", "outputKg": "42.800", "confirmedBy": "op-zhao"},
+    {"recordId": "rec-pack-r1", "lot": "a-2-r1", "kind": "pack", "version": "v2024.1",
+     "start": "2026-09-16T17:00:00", "end": "2026-09-16T18:30:00",
+     "params": {"net_weight_g": "500"}, "inputKg": "42.500", "outputKg": "42.500", "confirmedBy": "op-zhao"}
+  ],
+  "curves": {
+    "curve-fry-a1": {
+      "comment": "初传报文缺少 360s/390s 两点（330→420 出现90秒缺口）；记录未签署，10:18 传感器补传补齐后才签署。",
+      "initialPoints": [[0,122],[30,128],[60,135],[90,141],[120,146],[150,149],[180,151],[210,152],[240,152],[270,151],[300,150],[330,150],[420,149],[450,148],[480,147],[510,145],[540,142],[570,138],[600,132]],
+      "backfillPoints": [[360,150],[390,149]]
+    },
+    "curve-fry-a2": {
+      "comment": "240s 后直到 870s 才有采样：630 秒间隔，约10分钟温度缺口；曲线已由操作人签署确认，只能走偏差单，本批评估结论为返工。",
+      "initialPoints": [[0,121],[30,127],[60,134],[90,140],[120,145],[150,149],[180,151],[210,152],[240,152],[870,146],[900,140]]
+    },
+    "curve-fry-r1": {
+      "comment": "返工批重新炒制，曲线完整连续。",
+      "initialPoints": [[0,123],[30,130],[60,138],[90,144],[120,149],[150,152],[180,154],[210,155],[240,155],[270,154],[300,153],[330,152],[360,151],[390,150],[420,149],[450,147],[480,145],[510,142],[540,139],[570,135],[600,130]]
+    }
+  },
+  "movements": [
+    {"kind": "split", "source": "proc-0915-a", "outputs": ["a-1", "a-2"],
+     "amounts": {"a-1": "78.700", "a-2": "52.500"}, "lossKg": "0.000", "at": "2026-09-15T10:00:00"},
+    {"kind": "rework", "source": "a-2", "target": "a-2-r1", "deviation": "dev-gap",
+     "amount": "46.700", "plannedBy": "plan-li", "at": "2026-09-16T14:30:00"}
+  ],
+  "samples": [
+    {"sampleId": "s-a1", "lot": "a-1", "fromRecord": "rec-dry-a1", "kg": "0.300", "by": "qa-sun", "at": "2026-09-15T11:50:00"},
+    {"sampleId": "s-a2", "lot": "a-2", "fromRecord": "rec-dry-a2", "kg": "0.300", "by": "qa-sun", "at": "2026-09-15T11:50:00",
+     "note": "缺口被受权人发现前已取样；a-2 返工后该样品与报告不得继续用于放行"},
+    {"sampleId": "s-r1", "lot": "a-2-r1", "fromRecord": "rec-dry-r1", "kg": "0.300", "by": "qa-sun", "at": "2026-09-16T16:30:00"}
+  ],
+  "testLimits": {
+    "水分": ["8.0", "12.0"],
+    "总灰分": ["0", "7.0"],
+    "浸出物": ["45.0", "100.0"]
+  },
+  "reports": [
+    {"reportId": "r-0914", "sampleId": "s-0914", "lot": "proc-0914-z", "at": "2026-09-14T16:00:00",
+     "results": {"水分": "10.0", "总灰分": "5.1", "浸出物": "58.0"},
+     "note": "上一批报告：车间放行申请单引用了它，必须被拦截（批号不符）"},
+    {"reportId": "r-a1", "sampleId": "s-a1", "at": "2026-09-15T12:30:00",
+     "results": {"水分": "10.2", "总灰分": "5.0", "浸出物": "57.4"}},
+    {"reportId": "r-a2", "sampleId": "s-a2", "at": "2026-09-15T12:35:00",
+     "results": {"水分": "10.4", "总灰分": "5.2", "浸出物": "56.8"},
+     "note": "虽是本批样品，但属于原批 a-2；返工批 a-2-r1 不得借用"},
+    {"reportId": "r-r1", "sampleId": "s-r1", "at": "2026-09-16T17:30:00",
+     "results": {"水分": "10.1", "总灰分": "5.0", "浸出物": "58.2"}}
+  ],
+  "deviations": [
+    {"deviationId": "dev-gap", "lot": "a-2", "kind": "temperature-gap",
+     "title": "炒制温度曲线约10分钟缺口",
+     "detail": "rec-fry-a2 在 240s~870s 之间无采样（间隔630秒），记录已由 op-zhao 于10:50签署。",
+     "durationMinutes": 10, "linkedRecord": "rec-fry-a2",
+     "openedBy": "qa-sun", "openedAt": "2026-09-16T09:00:00",
+     "assessedBy": "dev-qian", "assessedAt": "2026-09-16T10:30:00",
+     "disposition": "rework_approved",
+     "assessment": "缺口覆盖文火炒制关键段，补传不能覆盖已签署记录；成品质量不可仅凭终点检验确认，整批返工重炒。",
+     "closedAt": "2026-09-16T18:40:00", "closureNote": "返工批 a-2-r1 重新炒制/干燥/取样/包装，曲线完整，r-r1 合格。"},
+    {"deviationId": "dev-yield", "lot": "proc-0915-a", "kind": "yield-mismatch",
+     "title": "成品收率与领料量对不上",
+     "detail": "车间上报成品 111.600 kg，与领料 120.000 kg 药材对不上。",
+     "reportedKg": "111.6",
+     "openedBy": "qa-sun", "openedAt": "2026-09-16T09:10:00",
+     "assessedBy": "dev-qian", "assessedAt": "2026-09-16T11:00:00",
+     "disposition": "concession_approved",
+     "assessment": "台账逐克回放：实际成品 112.600 kg（a-1 70.100 + a-2-r1 42.500），取样 0.900 kg，工序净损耗 20.600 kg，黄酒带入 14.100 kg；120.000+14.100=112.600+0.900+20.600。上报值漏计 1.000 kg，实为记录错误非物料流失。",
+     "closedAt": "2026-09-16T18:45:00", "closureNote": "更正批包装记录为 112.600 kg，增加包装岗双人复核。"}
+  ],
+  "releaseAttempts": [
+    {"lot": "a-1", "reports": ["r-0914"], "at": "2026-09-16T08:30:00",
+     "expect": "blocked: 借用上一批 proc-0914-z 的报告", "decidedBy": "qp-wang"},
+    {"lot": "a-2-r1", "reports": ["r-a2"], "at": "2026-09-16T18:50:00",
+     "expect": "blocked: 借用原批 a-2 的旧报告", "decidedBy": "qp-wang"},
+    {"lot": "a-1", "reports": ["r-a1"], "at": "2026-09-17T09:00:00",
+     "expect": "full", "decidedBy": "qp-wang"},
+    {"lot": "a-2-r1", "reports": ["r-r1"], "at": "2026-09-17T09:05:00",
+     "expect": "full", "decidedBy": "qp-wang"}
+  ],
+  "expected": {
+    "issuedHerbKg": "120.000",
+    "wineAddedKg": "14.100",
+    "finishedKg": "112.600",
+    "finishedByLot": {"a-1": "70.100", "a-2-r1": "42.500"},
+    "sampleKg": "0.900",
+    "processLossKg": "20.600",
+    "wineLotBalanceKg": "0.900",
+    "reconciliation": "120.000 + 14.100 = 112.600 + 0.900 + 20.600 = 134.100",
+    "finalRelease": [
+      {"lot": "a-1", "report": "r-a1", "sample": "s-a1", "scope": "full", "kg": "70.100"},
+      {"lot": "a-2-r1", "report": "r-r1", "sample": "s-r1", "scope": "full", "kg": "42.500"}
+    ]
+  }
+}
