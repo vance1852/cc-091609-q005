@@ -1,1 +1,107 @@
-{"product":"酒炙当归","lot":"proc-0915-a","inputKg":"120.0","movements":[{"kind":"split","outputs":["a-1","a-2"]},{"kind":"rework","source":"a-2","target":"a-2-r1"}],"deviations":[{"kind":"temperature-gap","durationMinutes":10},{"kind":"yield-mismatch","reportedKg":"111.6"}]}
+{
+  "product": "酒炙当归",
+  "specification_version": "v2023",
+  "worked_at": "2026-09-15",
+  "raw": {
+    "lot": "proc-0915-a",
+    "input_kg": "120.0"
+  },
+  "excipient": {
+    "lot": "wine-0915",
+    "name": "黄酒",
+    "received_kg": "15.0",
+    "added_kg": "13.8"
+  },
+  "stages": [
+    {
+      "kind": "clean",
+      "loss_kg": "3.5",
+      "params": {"foreign_matter_pct": "1.2"}
+    },
+    {
+      "kind": "cut",
+      "loss_kg": "1.5",
+      "params": {"slice_thickness_mm": "2.2"}
+    },
+    {
+      "kind": "add_excipient",
+      "params": {"wine_rate_pct": "12.0", "wine_alcohol_pct": "15.0"}
+    },
+    {
+      "kind": "moisten",
+      "loss_kg": "0.4",
+      "params": {"moisten_minutes": "120", "moisten_temp_c": "25"}
+    }
+  ],
+  "split": {
+    "loss_kg": "0",
+    "outputs": {"proc-0915-a-1": "64.2", "proc-0915-a-2": "64.2"}
+  },
+  "branches": {
+    "proc-0915-a-1": {
+      "fry": {
+        "loss_kg": "6.3",
+        "params": {"fry_minutes": "12"},
+        "sensor_gap_minutes": 3,
+        "backfilled_before_sign": true
+      },
+      "dry": {
+        "loss_kg": "2.0",
+        "params": {"dry_temp_c": "60", "moisture_pct": "8.5"}
+      },
+      "sample_kg": "0.3",
+      "pack_loss_kg": "0",
+      "report_results": [
+        {"name": "水分", "value": "8.5", "lower": null, "upper": "10.0", "unit": "%"},
+        {"name": "总灰分", "value": "6.2", "lower": null, "upper": "7.0", "unit": "%"},
+        {"name": "醇溶性浸出物", "value": "58.5", "lower": "55.0", "upper": null, "unit": "%"}
+      ]
+    },
+    "proc-0915-a-2": {
+      "fry": {
+        "loss_kg": "6.8",
+        "params": {"fry_minutes": "12"},
+        "sensor_gap_minutes": 10,
+        "confirmed_with_gap": true
+      },
+      "dry": {
+        "loss_kg": "2.0",
+        "params": {"dry_temp_c": "60", "moisture_pct": "9.1"}
+      },
+      "sample_taken": false,
+      "adjust_loss_kg": "0.1",
+      "rework": {
+        "target": "proc-0915-a-2-r1",
+        "loss_kg": "2.2"
+      },
+      "rework_fry": {
+        "loss_kg": "0",
+        "params": {"fry_minutes": "12"}
+      },
+      "rework_dry": {
+        "loss_kg": "0",
+        "params": {"dry_temp_c": "60", "moisture_pct": "9.0"}
+      },
+      "supplement_sample_kg": "0.3",
+      "pack_loss_kg": "0",
+      "report_results": [
+        {"name": "水分", "value": "9.0", "lower": null, "upper": "10.0", "unit": "%"},
+        {"name": "总灰分", "value": "6.5", "lower": null, "upper": "7.0", "unit": "%"},
+        {"name": "醇溶性浸出物", "value": "57.2", "lower": "55.0", "upper": null, "unit": "%"}
+      ]
+    }
+  },
+  "movements": [
+    {"kind": "split", "outputs": ["proc-0915-a-1", "proc-0915-a-2"]},
+    {"kind": "rework", "source": "proc-0915-a-2", "target": "proc-0915-a-2-r1"}
+  ],
+  "deviations": [
+    {"kind": "temperature-gap", "durationMinutes": 10, "lot": "proc-0915-a-2"},
+    {"kind": "yield-mismatch", "reported_kg": "111.6", "lot": "proc-0915-a-2"}
+  ],
+  "previous_report": {
+    "lot": "proc-0914",
+    "report_id": "rpt-0914-legacy",
+    "note": "上一生产批的成品检验报告，车间曾试图引用它为 a-2 申请放行"
+  }
+}
